@@ -1,5 +1,9 @@
 # Cat
 
+**Sorry for the little git history**
+
+**We had to work on SVN and moved the project here only after the server had been closed down**
+
 ## Description
 Third semester project (Computer Engineering Sherbrooke) by team CHAT.
 
