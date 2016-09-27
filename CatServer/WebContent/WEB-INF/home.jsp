@@ -1,110 +1,95 @@
-<%@page import="communication.*"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta
-	content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'
-	name='viewport' />
-<!-- bootstrap -->
-<link rel="stylesheet" type="text/css"
-	href="bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
-
-
-<link rel="stylesheet" type="text/css" href="css/chat-base.css">
-
-<!-- http://purecss.io/start/ -->
-<title>Domotique pour chat</title>
+	<%@include file="head.html"%>
+	<title>Accueil</title>
 </head>
 
-<body>
-	
-	<h1 class="cat_h1 text_effect">Domotique pour chat</h1>
-	
-	<div class="row cat-panel">
-				
-		<div class="col-md-5 cat-left-panel">
-			<div>
-				<img src="img/food.png" width=150px class="cat-img" />
+<body class="mdl-demo mdl-color--grey-100 mdl-color-text--grey-700 mdl-base">
+	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+		<header class="mdl-layout__header mdl-layout__header--scroll mdl-color--primary">
+			<div class="mdl-layout--large-screen-only mdl-layout__header-row"> </div>
+			<div class="mdl-layout--large-screen-only mdl-layout__header-row">
+				<h3>Centre de contrôle</h3>
 			</div>
-			<div class="cat-button-wrap">
-				<button type="button" class="peter-river-flat-button" id="feed_btn">Donner
-					de la nourriture au chat</button>
+			<div class="mdl-layout--large-screen-only mdl-layout__header-row"> </div>
+			<div class="mdl-layout__tab-bar mdl-js-ripple-effect mdl-color--primary-dark">
+				<a href="home" class="mdl-layout__tab is-active">Accueil</a> 
+				<a href="feed" class="mdl-layout__tab">Nourrir & Abreuver</a> 
+				<a href="media" class="mdl-layout__tab">Vidéo & Audio</a> 
+				<a href="about" class="mdl-layout__tab ">À propos</a>
 			</div>
-			<div>
-				<img src="img/water.png" width=100px class="cat-img" />
+			</header>
+		<main class="mdl-layout__content">
+		<div class="mdl-layout__tab-panel is-active" id="home">
+			<section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp ">
+			<div class="demo_card_1 demo-card-wide mdl-card mdl-shadow--2dp  mdl-cell--12-col-desktop mdl-cell--9-col-tablet mdl-cell--4-col-phone">
+				<div class="mdl-card__title ">
+					<h2 class="mdl-card__title-text txt_shw">Abreuver le chat</h2>
+				</div>
+				<div class="mdl-card__supporting-text">
+					<span class="cite">“Chat échaudé craint l’eau froide.”</span>
+				</div>
+				<div class="mdl-card__actions mdl-card--border">
+					<a href="feed" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+						Abreuver </a>
+				</div>
 			</div>
-			<div class="cat-button-wrap">
-				<button type="button" class="peter-river-flat-button" id="water_btn">Donner
-					de l'eau au chat</button>
+			</section>
+
+			<section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp ">
+			<div class="demo_card_2 demo-card-wide mdl-card mdl-shadow--2dp  mdl-cell--12-col-desktop mdl-cell--9-col-tablet mdl-cell--4-col-phone">
+				<div class="mdl-card__title ">
+					<h2 class="mdl-card__title-text txt_shw">Nourrir le chat</h2>
+				</div>
+				<div class="mdl-card__supporting-text">
+					<span class="cite">“Chat gourmand rend la cuisinière avisée.”</span>
+				</div>
+				<div class="mdl-card__actions mdl-card--border">
+					<a href="feed" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+						Nourrir </a>
+				</div>
 			</div>
+			</section>
+
+			<section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp ">
+			<div class="demo_card_3 demo-card-wide mdl-card mdl-shadow--2dp  mdl-cell--12-col-desktop mdl-cell--9-col-tablet mdl-cell--4-col-phone">
+				<div class="mdl-card__title ">
+					<h2 class="mdl-card__title-text txt_shw">Vidéo du chat</h2>
+				</div>
+				<div class="mdl-card__supporting-text">
+					<span class="cite">"Chat échaudé craint l’eau froide."</span>
+				</div>
+				<div class="mdl-card__actions mdl-card--border">
+					<a href="media" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+						Regarder </a>
+				</div>
+			</div>
+			</section>
+
+			<section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp ">
+			<div class="demo_card_4 demo-card-wide mdl-card mdl-shadow--2dp  mdl-cell--12-col-desktop mdl-cell--9-col-tablet mdl-cell--4-col-phone">
+				<div class="mdl-card__title ">
+					<h2 class="mdl-card__title-text txt_shw">Parler à votre chat</h2>
+				</div>
+				<div class="mdl-card__supporting-text">
+					<span class="cite">“Il y a deux moyens d'oublier les tracas de la vie: la musique et les chats.”</span>
+				</div>
+				<div class="mdl-card__actions mdl-card--border">
+					<a href="media" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+						Parler </a>
+				</div>
+			</div>
+			</section>
+
 		</div>
-		<div class="col-md-7 cat-right-panel">
-			<h2 class="cat-h2">Votre chat en direct</h2>
-			<img src="img/tmp_stream.jpg" width=100%/>
-			<!-- <div class="video-box embed-responsive embed-responsive-16by9">
-				<iframe width="420" height="315"
-					src="https://www.youtube.com/embed/H4aBEE8iDDU" frameborder="0"
-					allowfullscreen></iframe>
-			</div>
-			
-			-->
+		<footer class="mdl-mega-footer">
+
+		<div class="mdl-mega-footer--bottom-section">
+			<div class="mdl-logo">Équipe Chat © 2016</div>
 		</div>
-		
+		</footer> </main>
 	</div>
-	<footer>Produit par l'équipe 1 © ∫ <img src="img/hellogiphy.gif" width=30px /></footer>	
-	
-	<strong id="ip-box"></strong>
-	<strong id="msg_box"></strong>
-
-	<script type="text/javascript" src="js/jquery2.2.4.js">
-		
-	</script>
-	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-
-
-	<script>
-		var q_url = "http://192.168.1.115:8080/CatServer/home";
-		$("#ip-box").text(q_url);
-
-		$("#feed_btn").click(function() {
-			console.log("Food");
-			$("#feed_btn").attr("disabled", true);
-			$("#water_btn").attr("disabled", true);
-			$("#msg_box").text("Food");
-			$.ajax({
-				type : "POST",
-				url : q_url,
-				data : 'cat=FOOD',
-				success : function(response) {
-					$("#msg_box").text("Food = sucess");
-					$("#feed_btn").attr("disabled", false);
-					$("#water_btn").attr("disabled", false);
-				}
-			});
-
-		});
-
-		$("#water_btn").click(function() {
-			console.log("Water");
-			$("#water_btn").attr("disabled", true);
-			$("#feed_btn").attr("disabled", true);
-			$("#msg_box").text("Water");
-			$.ajax({
-				type : "POST",
-				url : q_url,
-				data : 'cat=WATER',
-				success : function(response) {
-					$("#msg_box").text("Water = sucess");
-					$("#water_btn").attr("disabled", false);
-					$("#feed_btn").attr("disabled", false);
-				}
-			});
-		});
-	</script>
 </body>
 </html>

@@ -1,6 +1,8 @@
 package main;
 
-import communication.*;
+import communication.ClientCommunication;
+import communication.JSONMessage;
+import communication.Message;
 import execution.Command;
 
 public class Controller {
@@ -9,22 +11,11 @@ public class Controller {
 	
 	public void run(String[] args) {
 		ClientCommunication communication = createClientCommunication(args);
-
 		Thread communicationThread = new Thread(communication);
 		communicationThread.start();
 
-		CommandCreator commandCreator = createCommandCreator();
-		
-		while (verifyRunning()) {
-			Message message = communication.pop();
-			if (message != null) {
-				Command command = commandCreator.createCommand(message);
-
-				if (command != null) {
-					boolean signal = command.execute();
-					communication.push(new JSONMessage(!signal));
-				}
-			}
+		while (isRunning()) {
+			manageMessage(communication);
 			
 			try {
 				Thread.sleep(1);
@@ -46,8 +37,20 @@ public class Controller {
 		}
 	}
 	
-	public boolean verifyRunning() {
+	public boolean isRunning() {
 		return running;
 	}
 	
+	private void manageMessage(ClientCommunication communication ){
+		Message message = communication.pop();
+		CommandCreator commandCreator = createCommandCreator();
+		
+		if (message != null) {
+			Command command = commandCreator.createCommand(message);
+			if (command != null) {
+				boolean signal = command.execute();
+				communication.push(new JSONMessage(!signal));
+			}
+		}
+	}
 }

@@ -32,7 +32,7 @@ public class TestController {
 		Controller controller = spy(new Controller());
 		when(controller.createClientCommunication(any(String[].class))).thenReturn(clientCom);
 		when(controller.createCommandCreator()).thenReturn(creator);
-		when(controller.verifyRunning()).thenReturn(true).thenReturn(true).thenReturn(true).thenReturn(true).thenReturn(false);
+		when(controller.isRunning()).thenReturn(true).thenReturn(true).thenReturn(true).thenReturn(true).thenReturn(false);
 		
 		controller.run(new String[0]);
 	}

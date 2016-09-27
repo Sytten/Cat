@@ -9,6 +9,7 @@ public abstract class Message {
 	public abstract Map<String, String> getParameter();
 	
 	public abstract String getParameter(String param);
-	
+
 	public abstract String toString();
+
 }

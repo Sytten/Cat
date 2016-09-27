@@ -1,58 +1,54 @@
 package communication;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
 import org.json.JSONObject;
 
-
 public class JSONMessage extends Message {
 	JSONObject obj = new JSONObject();
 	Map<String, String> list = null;
 
-	public JSONMessage(Boolean bool){	
+	public JSONMessage(Boolean bool) {
 		obj.put("type", "ACK");
-		
+
 		list = new HashMap<String, String>();
 		list.put("ERROR", bool.toString().toUpperCase());
-        obj.put("parametres", list);
+		obj.put("parametres", list);
+	}
 
-	    //System.out.print(obj);  
-	}  
-	
-	public JSONMessage(String s){
+	public JSONMessage(String s) {
 		list = new HashMap<String, String>();
 		obj = new JSONObject(s);
 		JSONObject jsonObject = (obj.getJSONObject("parametres"));
-		Iterator x = jsonObject.keys();
+		Iterator<?> keyList = jsonObject.keys();
 
-		while (x.hasNext()){
-		    String key = (String) x.next();
-		    list.put(key,jsonObject.getString(key));
+		while (keyList.hasNext()) {
+			String key = (String) keyList.next();
+			list.put(key, jsonObject.getString(key));
 		}
-	    //System.out.print(obj);  
-	}  
-	
-	public JSONMessage(String type, Map<String, String> params) {
-	    obj.put("type", type);
-        obj.put("parametres", params);
-        list = params;
-	    //System.out.print(obj);  
 	}
-	
-	public String getType(){
+
+	public JSONMessage(String type, Map<String, String> params) {
+		obj.put("type", type);
+		obj.put("parametres", params);
+		list = params;
+	}
+
+	public String getType() {
 		return obj.getString("type");
 	}
-	
-	public Map<String, String> getParameter(){	
+
+	public Map<String, String> getParameter() {
 		return list;
 	}
-	
-	public String getParameter(String param){
+
+	public String getParameter(String param) {
 		return list.get(param);
 	}
-	
-	public String toString(){
+
+	public String toString() {
 		return obj.toString();
 	}
 

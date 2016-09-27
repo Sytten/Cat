@@ -21,11 +21,11 @@ public class Sender implements Runnable {
 					try {
 						Message msg = outputBuffer.remove();
 						System.out.println("Sender: new message " + msg.toString());
-						out.println("BEGIN");
+						out.println("BEGINNING");
 						out.flush();
 						out.println(msg.toString());
 						out.flush();
-						out.println("END");
+						out.println("ENDING");
 						out.flush();
 					} catch (Exception e) {
 						System.out.println("Sender: can't send data to remote");

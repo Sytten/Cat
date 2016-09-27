@@ -1,22 +1,23 @@
 package tests;
 
-import org.junit.Test;
 import org.junit.Assert;
-import execution.*;
+import org.junit.Test;
+
+import execution.motor.PythonMotorExecutor;
 
 public class TestPythonMotorExecutor {
-	
+
 	@Test
-	public void testExecute(){
+	public void testExecute() {
 		String type = "FOOD";
-		PythonMotorExecutor command = new PythonMotorExecutor("test.py");
-		boolean test=command.execute(type);
+		PythonMotorExecutor command = new PythonMotorExecutor("ExternalFiles/test.py");
+		boolean test = command.execute(type, "2");
 		System.out.println(test);
-		Assert.assertTrue(command.execute(type));
-		
+		Assert.assertTrue(command.execute(type, "2"));
+
 		type = "FALSE";
-		command = new PythonMotorExecutor("test.py");
-		Assert.assertFalse(command.execute(type));
+		command = new PythonMotorExecutor("ExternalFiles/test.py");
+		Assert.assertFalse(command.execute(type, "2"));
 	}
-	
+
 }

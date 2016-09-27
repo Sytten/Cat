@@ -17,35 +17,17 @@ public class ClientCommunication implements Runnable {
 		this.port = port;
 	}
 
-	public ClientCommunication() {
-	}
-
-	public boolean push(Message msg) {
-		if (connection != null) {
-			return connection.push(msg);
-		}
-		return false;
-	}
-
-	public Message pop() {
-		if (connection != null) {
-			return connection.pop();
-		}
-		return null;
-	}
+	public ClientCommunication() {}
 
 	@Override
 	public void run() {
 		while (true) {
 			try {
 				socket = new Socket(ip, port);
-
 				connection = new Connection(socket);
 				connectionThread = new Thread(connection);
 				connectionThread.start();
-
 				connectionThread.join();
-
 				connection = null;
 
 			} catch (UnknownHostException e) {
@@ -62,5 +44,13 @@ public class ClientCommunication implements Runnable {
 				System.err.println("ClientCommunication: thread can;t sleep");
 			}
 		}
+	}
+	
+	public boolean push(Message msg) {
+		return connection != null ? connection.push(msg) : false;
+	}
+
+	public Message pop() {
+		return connection != null ? connection.pop() : null;
 	}
 }

@@ -6,15 +6,13 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-
 public class Connection implements Runnable {
 
 	private Socket socket;
-	
 	private Sender sender = null;
-	private Receiver receiver = null;
 	private Thread senderThread = null;
-	private Thread receiverThread = null;
+	private Receiver receiver = null;
+	private Thread   receiverThread = null;
 
 	public Connection(Socket socket) {
 		this.socket = socket;
@@ -23,45 +21,40 @@ public class Connection implements Runnable {
 	@Override
 	public void run() {
 		try {
-			sender = new Sender(new PrintWriter(socket.getOutputStream()));
-			senderThread = new Thread(sender);
-			senderThread.start();
+			startSender();
+			startReceiver();
 
-			receiver = new Receiver(new BufferedReader(new InputStreamReader(socket.getInputStream())));
-			receiverThread = new Thread(receiver);
-			receiverThread.start();
-			
-			receiverThread.join();
-			
-		} catch (IOException e) {
-			System.out.println("Connection: can't read or write to remote");
-		} catch (InterruptedException e) {
+		} catch (Exception e) {
 			System.out.println("Connection: stopping thread now");
-		}
-		finally {
+		} finally {
 			receiverThread.interrupt();
 			senderThread.interrupt();
 			try {
 				socket.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			} catch (IOException e) {}
 			System.out.println("Connection: closing connection to " + socket.getInetAddress().toString());
 		}
 	}
+
+	private void startSender() throws IOException{
+		sender = new Sender(new PrintWriter(socket.getOutputStream()));
+		senderThread = new Thread(sender);
+		senderThread.start();
+	}
+	
+	private void startReceiver() throws InterruptedException, IOException{
+		receiver = new Receiver(new BufferedReader(new InputStreamReader(socket.getInputStream())));
+		receiverThread = new Thread(receiver);
+		receiverThread.start();
+		receiverThread.join();
+	}
 	
 	public Message pop() {
-		if(receiver != null) {
-			return receiver.pop();
-		}
-		return null;
-	}
-	
-	public boolean push(Message msg) {
-		if(receiver != null) {
-			return sender.push(msg);
-		}
-		return false;
+		return (receiver != null) ? receiver.pop() : null;
 	}
 
+	public boolean push(Message msg) {
+		return (receiver != null) ? sender.push(msg) : false;
+	}
+	
 }

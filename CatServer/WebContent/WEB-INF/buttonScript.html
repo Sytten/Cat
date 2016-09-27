@@ -1,0 +1,20 @@
+<script>
+	var q_url = location.href;
+
+	$(".monBouton").click(function(event) {
+		$(".monBouton").attr("disabled", true);
+
+		var qty = $(this).attr("qty");
+		var type = $(this).attr("btnType");
+
+		var dataStr = "cat=" + type + "&qty=" + qty;
+		$.ajax({
+			type : "POST",
+			url : q_url,
+			data : dataStr,
+			success : function(response) {
+				$(".monBouton").attr("disabled", false);
+			}
+		});
+	});
+</script>

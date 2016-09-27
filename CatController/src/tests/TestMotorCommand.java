@@ -7,9 +7,9 @@ import org.mockito.*;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
-import execution.MotorCommand;
-import execution.MotorCommand.MotorCommandType;
-import execution.PythonMotorExecutor;
+import execution.motor.MotorCommand;
+import execution.motor.PythonMotorExecutor;
+import execution.motor.MotorCommand.MotorCommandType;
 
 public class TestMotorCommand {
 	@Mock
@@ -21,8 +21,8 @@ public class TestMotorCommand {
 	MotorCommandType commandtype=MotorCommandType.valueOf("FOOD");
 	@Test
 	public void testConstructor(){
-		Mockito.when(commandPython.execute(commandtype.toString())).thenReturn(true);
-		testMotorCommand=new MotorCommand(commandtype,commandPython);
+		Mockito.when(commandPython.execute(Mockito.any(String.class), Mockito.any(String.class))).thenReturn(true);
+		testMotorCommand=new MotorCommand(commandtype, "2",commandPython);
 		assertTrue(testMotorCommand.execute());
 	}
 }

@@ -1,12 +1,7 @@
 package communication;
-/*
- * http://www.journaldev.com/1945/servlet-listener-example-servletcontextlistener-httpsessionlistener-and-servletrequestlistener
- */
 
-import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.SocketException;
 
 public class ServerCommunication implements Runnable {
 
@@ -29,44 +24,31 @@ public class ServerCommunication implements Runnable {
 
 		try {
 			serverSocket = new ServerSocket(port);
+			while (true) {
 
-			try {
-				while (true) {
+				clientSocket = serverSocket.accept();
 
-					clientSocket = serverSocket.accept();
+				System.out.println("ServerCommunication: client connected " + clientSocket.getInetAddress().toString());
 
-					System.out.println(
-							"ServerCommunication: client connected " + clientSocket.getInetAddress().toString());
-
-					if (connectionThread != null) {
-						connectionThread.interrupt();
-					}
-
-					connection = new Connection(clientSocket);
-
-					connectionThread = new Thread(connection);
-					connectionThread.start();
+				if (connectionThread != null) {
+					connectionThread.interrupt();
 				}
-			} catch (Exception e) {
-				System.out.println("ServerCommunication: can't read or write to remote "
-						+ clientSocket.getInetAddress().toString());
+
+				connection = new Connection(clientSocket);
+				connectionThread = new Thread(connection);
+				connectionThread.start();
 			}
-		} catch (IOException e) {
+
+		} catch (Exception e) {
 			System.out.println("ServerCommunication: can't open server socket");
 		}
 	}
 
-	public boolean push(Message msg) {
-		if (connection != null) {
-			return connection.push(msg);
-		}
-		return false;
+	public Message pop() {
+		return (connection != null) ? connection.pop() : null;
 	}
 
-	public Message pop() {
-		if (connection != null) {
-			return connection.pop();
-		}
-		return null;
+	public boolean push(Message msg) {
+		return (connection != null) ? connection.push(msg) : false;
 	}
 }
