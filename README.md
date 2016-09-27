@@ -15,7 +15,7 @@ Contributors:
 - [Larochelle000](https://github.com/Larochelle000)
 And others on the team.
 
-The projet is separated in 4 projets.
+The project is separated in 4 sub-projects.
 - CatController : That one is to be packaged in a jar and run on a Raspberry Pi (on it python 2 must installed and the script to run motors must be in the same folder). You must specify the IP of the server.
 - CatServer : That one is to run a computer with Apache Tomcat 8 installed and configured.
 - CatStatistics : Usefull to parse csv from Taiga (Scrum manager) with custom fields.
