@@ -1,0 +1,158 @@
+@font-face {
+    font-family: hellokitty;
+    src: url(hellokittyfont.ttf);
+}
+
+@font-face {
+    font-family: varelaround;
+    src: url(VarelaRound-Regular.otf);
+}
+
+body {
+	font-family: varelaround, "Helvetica Neue", Helvetica, Arial, sans-serif;
+	background-image: url("../img/background.png");
+}
+
+.cat_h1 {
+	font-size: 40pt;
+	text-align: center;
+	background-color: rgba(255,255, 255, 0.95);
+	margin-bottom: 0px;
+	margin-top: 0px;
+	padding: 10px;
+	
+	
+	-webkit-font-smoothing: antialiased;
+	
+	
+}
+
+.cat-h2 {
+		text-align: center;
+		margin-top: 0px;
+}
+
+.video-box {
+	text-align: center;
+}
+
+.cat-panel {
+	background-color: rgba(255, 255, 255, 0.6);
+	border-radius: 20px;
+	/*border: 1px solid #acacad;*/
+	/*box-shadow: rgba(0, 0, 0, 0.296875) 0px 1px 3px 0px;*/
+	padding: 20px;
+	/*margin: 20px;*/
+	padding: 20px;
+}
+
+.cat-left-panel {
+	padding-top: 20px;
+	text-align: center;
+}
+
+.cat-button-wrap {
+	padding: 10px;
+	margin: auto;
+}
+
+.cat-img {
+	margin: 10px;
+}
+
+#ip-box {
+	background-color: white;
+	position: fixed;
+	bottom: 0px;
+	right: 0px;
+}
+#msg_box {
+	background-color: white;
+	position: fixed;
+	bottom: 0px;
+	left: 0px;
+}
+
+footer {
+	text-align: center;
+	background-color: rgba(255, 255, 255, 0.6);
+}
+
+/* text effect  */
+
+.text_effect{
+  font-family: hellokitty,  Impact;
+  text-align:center;
+  color: #e60e63; /*rgb(127,113,101);*/
+ /* letter-spacing: -7px;*/
+  font-weight: 400;
+  
+  text-transform:uppercase;
+  animation:blur .75s ease-out infinite;
+  text-shadow: -1px 0 #fcf0e5, 0 1px #fcf0e5, 1px 0 #fcf0e5, 0 -1px #fcf0e5;
+}
+
+/*
+@keyframes blur{
+  from{
+      text-shadow:0px 0px 10px #f6a6b0,
+      0px 0px 10px #f6a6b0, 
+      0px 0px 25px #f6a6b0,
+      0px 0px 25px #f6a6b0,
+      0px 0px 25px #f6a6b0,
+      0px 0px 25px #f6a6b0,
+      0px 0px 25px #f6a6b0,
+      0px 0px 25px #f6a6b0,
+      0px 0px 50px #f6a6b0,
+      0px 0px 50px #f6a6b0,
+      0px 0px 50px #7B96B8,
+      0px 0px 150px #7B96B8,
+      0px 10px 100px #7B96B8,
+      0px 10px 100px #7B96B8,
+      0px 10px 100px #7B96B8,
+      0px 10px 100px #7B96B8,
+      0px -10px 100px #7B96B8,
+      0px -10px 100px #7B96B8;}
+}
+*/
+
+/* button effect */
+/* #Peter River Flat Button
+==================================================*/
+.peter-river-flat-button {
+  position: relative;
+  vertical-align: top;
+  font-size: 16px;
+  padding: 10px;
+  color: white;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  background: #3498db;
+  border: 0;
+  border-bottom: 2px solid #2a8bcc;
+  cursor: pointer;
+  -webkit-box-shadow: inset 0 -2px #2a8bcc;
+  box-shadow: inset 0 -2px #2a8bcc;
+}
+.peter-river-flat-button:active {
+  top: 1px;
+  outline: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.peter-river-flat-button:disabled {
+	opacity: 0.4;
+}
+
+
+
+/* Medium devices (desktops, 992px and up) */
+@media ( max-width : 992px) {
+	.cat-right-panel {
+		padding-top: 20px;
+	}
+	.cat-img {
+		display: none;
+	}
+}

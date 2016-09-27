@@ -1,36 +1,53 @@
 package main;
 
-public class Controller {	
+import communication.*;
+import execution.Command;
+
+public class Controller {
 	
-	public static void main(String[] args) {
-		ClientCommunication communication = new ClientCommunication(args);
+	boolean running = true;
+	
+	public void run(String[] args) {
+		ClientCommunication communication = createClientCommunication(args);
+
 		Thread communicationThread = new Thread(communication);
 		communicationThread.start();
-		Gpios gpios = new Gpios();
+
+		CommandCreator commandCreator = createCommandCreator();
 		
-		boolean running = true;
-		while(running) {
-			// check input buffer
-			String input = communication.popInput();
-			if(input != null) {
-				if(gpios.set(input)) {
-					gpios.setYellowLed(true);
-					communication.pushOutput("RECU");
+		while (verifyRunning()) {
+			Message message = communication.pop();
+			if (message != null) {
+				Command command = commandCreator.createCommand(message);
+
+				if (command != null) {
+					boolean signal = command.execute();
+					communication.push(new JSONMessage(!signal));
 				}
-				else {
-					communication.pushOutput("ERROR");
-				}
-				
 			}
 			
-			// check gpios
-			if(gpios.buttonWasPressed()) {
-				communication.pushOutput("BTN");
-				gpios.setYellowLed(false);
-				System.out.println("BTN");
+			try {
+				Thread.sleep(1);
+			} catch (InterruptedException e) {
+				System.out.println("Controller: Thread can't sleep");
 			}
-			
 		}
-		
 	}
+	
+	public CommandCreator createCommandCreator() {
+		return new CommandCreator();
+	}
+	
+	public ClientCommunication createClientCommunication(String[] args) {
+		if (args != null && args.length > 0) {
+			return new ClientCommunication(args[0], Integer.parseInt(args[1]));
+		} else {
+			return new ClientCommunication();
+		}
+	}
+	
+	public boolean verifyRunning() {
+		return running;
+	}
+	
 }
