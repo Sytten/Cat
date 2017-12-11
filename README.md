@@ -15,6 +15,7 @@ You can also see it and talk to it!
 Contributors:
 - [Sytten](https://github.com/Sytten)
 - [Larochelle000](https://github.com/Larochelle000)
+- [Philippe Girard](https://github.com/philippegirard)
 And others on the team.
 
 The project is separated in 4 sub-projects.
